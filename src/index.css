@@ -10,12 +10,13 @@ body{
   font-family: "Roboto", serif;
 }
 
+
 form{
   display: flex;
   flex-direction: column;
   align-items: center;
   gap:1em;
-  margin-top: 1em;
+  margin: 1em 0 0 1em;
 }
 
 div.table{
@@ -24,7 +25,7 @@ div.table{
   grid-template-columns: max-content minmax(min-content, 100px);
   align-items: center;
   justify-items: end;
-  min-width: 360px;
+  min-width: 310px;
 }
 
 label{
@@ -88,6 +89,7 @@ p.warning{
 
 button{
   border: 1px solid rgb(22, 22, 22);
+  margin-top: 1em;
   border-radius: 10px;
   color: #181818;
   font-weight: bold;
@@ -95,6 +97,10 @@ button{
   padding: .5em 2em;
   font-size: 1rem;
   cursor: pointer;
+}
+
+.wrapper{
+  text-align: center;
 }
 
 button:hover, button:active{

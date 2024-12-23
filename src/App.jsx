@@ -178,20 +178,22 @@ function App() {
   return (
     <>
       <form onSubmit={e=>calculateTolerance(e)}>
-        <div className="table">
-          <label class="nominal-size-label" htmlFor="nominal-size">Dimensiune nominala</label>
-          <div className="nominal-size-container">
-            <div className="nominal-input-container">
-              <input id="nominal-size" maxLength={2} className="nominal-size" style={backgroundStyle} type="number" name="dimensiune-nominala" value={nominalSize} onInput={({target}) => getNominalSize(target)}/>
-              <span> mm</span>  
+        <div className="wrapper">
+          <div className="table">
+            <label class="nominal-size-label" htmlFor="nominal-size">Dimensiune nominala</label>
+            <div className="nominal-size-container">
+              <div className="nominal-input-container">
+                <input id="nominal-size" maxLength={2} className="nominal-size" style={backgroundStyle} type="number" name="dimensiune-nominala" value={nominalSize} onInput={({target}) => getNominalSize(target)}/>
+                <span> mm</span>  
+              </div>
+              <p className={`warning ${hasError ? "" : "hidden"}`}>In intervalul [20, 50]</p>
             </div>
-            <p className={`warning ${hasError ? "" : "hidden"}`}>Trebuie in intervalul [20, 50]</p>
-          </div>
-          <Arbore {...{calculateTolerance, shaftLetter, shaftNumber, shaftLowerLimit, shaftUpperLimit}}/>    
+            <Arbore {...{calculateTolerance, shaftLetter, shaftNumber, shaftLowerLimit, shaftUpperLimit}}/>    
 
-          <Alezaj {...{calculateTolerance, hubLetter, hubNumber, hubLowerLimit, hubUpperLimit}}/>
+            <Alezaj {...{calculateTolerance, hubLetter, hubNumber, hubLowerLimit, hubUpperLimit}}/>
+          </div>
+          <button>Calculate</button>
         </div>
-        <button>Calculate</button>
       </form>
     </>
   )
