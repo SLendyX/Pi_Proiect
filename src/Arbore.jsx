@@ -8,27 +8,22 @@ export default function({calculateTolerance, shaftLetter, shaftNumber, shaftUppe
 
     const toleranceNumberShaft = ["01", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"]
     return(
-        <div className="arbore">
-            <label>
-                Arbore
+        <>
+            <label htmlFor="shaft-tolerance">Toleranta arbore</label>
+            <div id="shaft-tolerance" className="tolerence">
                 <select onChange={e=>calculateTolerance(e, 0)} className="shaft-tolerance-letter" value={shaftLetter}>
                     {toleranceLetterShaft.map((tolerance, index) => (<option key={index} value={tolerance}>{tolerance}</option>))}
                 </select>
                 <select onChange={e=>calculateTolerance(e, 1)} className="shaft-tolerance-number" value={shaftNumber}>
                     {toleranceNumberShaft.map((tolerance, index) => (<option key={index}>{tolerance}</option>))}
                 </select>
-            </label>
+            </div>
 
-            <br/>
-
-            <label>
-                Es
-                <input readOnly value={shaftLowerLimit!== undefined ? Number((shaftUpperLimit/1000).toFixed(5)) : "----"}/>
-            </label>
-            <label>
-                Ei
-                <input readOnly value={shaftLowerLimit!== undefined ? Number((shaftLowerLimit/1000).toFixed(5)) : "----"}/>
-            </label>
-        </div>
+            <label htmlFor="shaft-upper-limit" className="limit-labels">Es</label>
+            <input id="shaft-upper-limit" readOnly value={shaftUpperLimit!== undefined ? `${Number((shaftUpperLimit/1000).toFixed(5))} mm` : "----"}/>
+            
+            <label htmlFor="shaft-lower-limit" className="limit-labels">Ei</label>
+            <input id="shaft-lower-limit" readOnly value={shaftLowerLimit!== undefined ? `${Number((shaftLowerLimit/1000).toFixed(5))} mm` : "----"}/>
+        </>
     )
 }

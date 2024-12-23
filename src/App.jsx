@@ -10,8 +10,9 @@ function App() {
   const {deltas, hubLowerLimits, hubUpperLimits} = tableobj
 
   //state
-  const [nominalSize, setNominalSize] = React.useState(0)
-  
+  const [nominalSize, setNominalSize] = React.useState(20)
+  const [hasError, setHasError] = React.useState(false)
+
   const [shaftLetter, setShaftLetter] = React.useState("a")
   const [shaftNumber, setShaftNumber] = React.useState("01")
   const [shaftLowerLimit, setShaftLowerLimit] = React.useState(undefined)
@@ -21,7 +22,6 @@ function App() {
   const [hubNumber, setHubNumber] = React.useState("01")
   const [hubLowerLimit, setHubLowerLimit] = React.useState(undefined)
   const [hubUpperLimit, setHubUpperLimit] = React.useState(undefined)
-
 
   function calculateTolerance(e, operation=-1){
     if(operation === 0)
@@ -59,7 +59,6 @@ function App() {
         upperLimit = tolerance/2
         lowerLimit = -upperLimit
       }else{
-        console.log(limitGapIndex)
         upperLimit = shaftUpperLimits[limitGapIndex][shaftLetter]
         lowerLimit = upperLimit !== undefined ? upperLimit - tolerance : undefined
       }
@@ -156,21 +155,44 @@ function App() {
 
   }, [shaftLetter, shaftNumber, hubNumber, hubLetter, nominalSize])
 
+  function getNominalSize(target){
+    
+    setNominalSize(oldNominalSize =>{
+      const newValue = target.value === "" ? "" : Number(target.value)
+      if(newValue === "" || newValue<=50){
+        setHasError(false)
+        if(newValue < 20)
+          setHasError(true)
+
+        return newValue
+      }
+      else{
+        setHasError(true)
+        return newValue < 1000 ? newValue : oldNominalSize
+      }
+    }); 
+  }
+
+  const backgroundStyle = {backgroundColor: (nominalSize >=20 && nominalSize<=50) ? "white" : "#FF0000"}
+
   return (
     <>
-      <div>
-        <form onSubmit={e=>calculateTolerance(e)} className="arbore">
-        <label>
-          Dimensiune nominala
-          <input type="number" name="dimensiune-nominala" value={nominalSize} onInput={({target}) => setNominalSize(target.value)}/>
-          </label>
+      <form onSubmit={e=>calculateTolerance(e)}>
+        <div className="table">
+          <label class="nominal-size-label" htmlFor="nominal-size">Dimensiune nominala</label>
+          <div className="nominal-size-container">
+            <div className="nominal-input-container">
+              <input id="nominal-size" maxLength={2} className="nominal-size" style={backgroundStyle} type="number" name="dimensiune-nominala" value={nominalSize} onInput={({target}) => getNominalSize(target)}/>
+              <span> mm</span>  
+            </div>
+            <p className={`warning ${hasError ? "" : "hidden"}`}>Trebuie in intervalul [20, 50]</p>
+          </div>
           <Arbore {...{calculateTolerance, shaftLetter, shaftNumber, shaftLowerLimit, shaftUpperLimit}}/>    
-          <br/>
-          <br/>
+
           <Alezaj {...{calculateTolerance, hubLetter, hubNumber, hubLowerLimit, hubUpperLimit}}/>
-          <button>Calculate</button>
-        </form>
-      </div>
+        </div>
+        <button>Calculate</button>
+      </form>
     </>
   )
 }

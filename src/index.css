@@ -1,4 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 body, html{
   margin: 0;
   padding: 0;
+}
+
+body{
+  font-size: 1rem;
+  font-family: "Roboto", serif;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:1em;
+  margin-top: 1em;
+}
+
+div.table{
+  display: grid;
+  gap:.25em .5em;
+  grid-template-columns: max-content minmax(min-content, 100px);
+  align-items: center;
+  justify-items: end;
+  min-width: 360px;
+}
+
+label{
+  user-select: none;
+}
+
+input, select, span{
+  font-size: .9rem;
+  font-family: "Roboto", serif;
+}
+
+input, div.tolerence{
+  justify-self: start;
+}
+
+input{
+  width: 100%;
+  padding: .25em .5em;
+  border-radius: 5px;
+  border: 1px solid #181818;
+  max-width: 100px;
+}
+
+.nominal-input-container{
+  position: relative;
+  max-width: 100px;
+  margin-bottom: .5em;
+}
+
+span{
+  position:absolute;
+  top: 0px;
+  bottom: 1px;
+  right: -10px;
+  align-self: center;
+  z-index: 2;
+}
+
+input.nominal-size{
+  position: relative;
+}
+
+input.nominal-size::-webkit-inner-spin-button {
+  display: none;
+}
+
+p.warning{
+  color: red;
+  margin: 0;
+  width: max-content;
+}
+
+.hidden{
+  display: none;
+}
+
+.nominal-size-label{
+  margin-top: .2em;
+  align-self: flex-start;
+}
+
+button{
+  border: 1px solid rgb(22, 22, 22);
+  border-radius: 10px;
+  color: #181818;
+  font-weight: bold;
+  background-color: #e4e4e4;
+  padding: .5em 2em;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover, button:active{
+  background-color: #a4f7ab98;
+}
+
+button:active{
+  box-shadow: inset #181818 0px 0px 5px;
 }
