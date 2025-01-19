@@ -5,7 +5,7 @@ export default function({calculateTolerance, hubLetter, hubNumber, hubLowerLimit
     const toleranceNumberHub = ["01", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"]
     return (
         <>
-            <label htmlFor="hub-tolerance">Toleranta alezaj</label>
+            <label htmlFor="hub-tolerance">Treapta precizie alezaj</label>
             <div id="hub-tolerance" className="tolerence">
               <select onChange={e=>calculateTolerance(e, 2)} className="hub-tolerance-letter" value={hubLetter}>
                 {toleranceLetterHub.map((tolerance, index) => (<option key={index} value={tolerance}>{tolerance}</option>))}

@@ -110,3 +110,7 @@ button:hover, button:active{
 button:active{
   box-shadow: inset #181818 0px 0px 5px;
 }
+
+.tip-piesa{
+  justify-self: start;
+}

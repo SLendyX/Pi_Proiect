@@ -23,6 +23,8 @@ function App() {
   const [hubLowerLimit, setHubLowerLimit] = React.useState(undefined)
   const [hubUpperLimit, setHubUpperLimit] = React.useState(undefined)
 
+  const [pieceType, setPieceType] = React.useState("arbore")
+
   function calculateTolerance(e, operation=-1){
     if(operation === 0)
       setShaftLetter(e.target.value)
@@ -188,9 +190,15 @@ function App() {
               </div>
               <p className={`warning ${hasError ? "" : "hidden"}`}>In intervalul [20, 50]</p>
             </div>
-            <Arbore {...{calculateTolerance, shaftLetter, shaftNumber, shaftLowerLimit, shaftUpperLimit}}/>    
 
-            <Alezaj {...{calculateTolerance, hubLetter, hubNumber, hubLowerLimit, hubUpperLimit}}/>
+            <div>Tip piesa</div>
+            <select className="tip-piesa"  value={pieceType} onChange={e => setPieceType(e.target.value)}>
+              {["arbore", "alezaj"].map((piesa, index) => (<option key={index}>{piesa}</option>))}
+            </select>
+
+            {pieceType === "arbore" ? <Arbore {...{calculateTolerance, shaftLetter, shaftNumber, shaftLowerLimit, shaftUpperLimit}}/>    
+            :
+            <Alezaj {...{calculateTolerance, hubLetter, hubNumber, hubLowerLimit, hubUpperLimit}}/>}
           </div>
           <button>Calculate</button>
         </div>
