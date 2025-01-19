@@ -196,7 +196,8 @@ function App() {
               {["arbore", "alezaj"].map((piesa, index) => (<option key={index}>{piesa}</option>))}
             </select>
 
-            {pieceType === "arbore" ? <Arbore {...{calculateTolerance, shaftLetter, shaftNumber, shaftLowerLimit, shaftUpperLimit}}/>    
+            {pieceType === "arbore" ? 
+            <Arbore {...{calculateTolerance, shaftLetter, shaftNumber, shaftLowerLimit, shaftUpperLimit}}/>    
             :
             <Alezaj {...{calculateTolerance, hubLetter, hubNumber, hubLowerLimit, hubUpperLimit}}/>}
           </div>
